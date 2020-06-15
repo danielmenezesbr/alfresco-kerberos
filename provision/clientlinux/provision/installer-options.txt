@@ -1,0 +1,6 @@
+mode=unattended
+prefix=/home/vagrant/alfresco
+alfresco_admin_password=noproblemo
+baseunixservice_install_as_service=0
+#disable-components=alfrescosolr,alfrescosolr4
+
