@@ -30,10 +30,10 @@ Set-Location clientlinux
 New-ItemProperty . -Name http -Value 1 -Type DWORD
 
 # Automatic logon with current username and password in Internet Explorer
-$RegPath = "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
-Set-ItemProperty $RegPath "AutoAdminLogon" -Value "1" -type String
-Set-ItemProperty $RegPath "DefaultUsername" -Value "MSHOME.NET\vagrant" -type String
-Set-ItemProperty $RegPath "DefaultPassword" -Value "vagrant" -type String
+#$RegPath = "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+#Set-ItemProperty $RegPath "AutoAdminLogon" -Value "1" -type String
+#Set-ItemProperty $RegPath "DefaultUsername" -Value "MSHOME.NET\vagrant" -type String
+#Set-ItemProperty $RegPath "DefaultPassword" -Value "vagrant" -type String
 
 # Change Internet Explorer Start Page
 $HomeURL = "http://clientlinux.mshome.net:8080/"
