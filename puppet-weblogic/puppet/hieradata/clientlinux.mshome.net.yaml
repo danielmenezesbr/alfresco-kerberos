@@ -1245,6 +1245,6 @@ identity_asserter_instances:
   'ldap':
     ensure:             'present'
     providerclassname:  'weblogic.security.providers.authentication.LDAPAuthenticator'
-    attributes:         'Principal;Host;Port;CacheTTL;CacheSize;MaxGroupMembershipSearchLevel;SSLEnabled;ConnectTimeout;ConnectionRetryLimit;UserBaseDN;UserFromNameFilter;UserNameAttribute;UserObjectClass;GroupBaseDN;Credential'
-    attributesvalues:   'cn=administrator,CN=Users,dc=mshome,dc=net;winserver.mshome.net;389;60;1024;4;0;2;2;CN=Users,DC=mshome,DC=net;(&(cn=%u)(objectclass=user));cn;user;CN=Users,DC=mshome,DC=net;Password#'
+    attributes:         'Principal;Host;Port;CacheTTL;CacheSize;MaxGroupMembershipSearchLevel;SSLEnabled;ConnectTimeout;ConnectionRetryLimit;UserBaseDN;UserFromNameFilter;UserNameAttribute;UserObjectClass;GroupBaseDN;Credential;GroupFromNameFilter;StaticGroupNameAttribute;StaticGroupObjectClass;StaticMemberDNAttribute;StaticGroupDNsfromMemberDNFilter'
+    attributesvalues:   'cn=administrator,CN=Users,dc=mshome,dc=net;winserver.mshome.net;389;60;1024;4;0;2;2;CN=Users,DC=mshome,DC=net;(&(cn=%u)(objectclass=user));cn;user;CN=Users,DC=mshome,DC=net;Password#;(&(cn=%g)(objectclass=group));cn;group;member;(&(member=%M)(objectclass=group))'
     order:              '2'
