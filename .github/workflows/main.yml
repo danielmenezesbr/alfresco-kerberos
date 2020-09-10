@@ -29,14 +29,14 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/.vagrant.d/boxes
-#            ~/.vagrant.d/boxes/cdaf-VAGRANTSLASH-WindowsServerDC
-#            ~/.vagrant.d/boxes/bento-VAGRANTSLASH-ubuntu-18.04
+            ~/.vagrant.d/boxes/cdaf-VAGRANTSLASH-WindowsServerDC
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
-      - name: vagrant
+      - name: Windows Server DC
         run: |
             vagrant plugin install vagrant-vbguest
             vagrant up dc
             vagrant powershell dc -c 'systeminfo'
-            vagrant up client
+            
+      - name: Alfresco
+        run: vagrant up client
