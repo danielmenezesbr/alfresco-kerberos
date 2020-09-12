@@ -49,7 +49,7 @@ def download(url, css_link):
     elements = driver.find_elements_by_css_selector('input[name=licenseAccept]')
     elements[1].click()
 
-    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[class="obttn"]')))
+    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[class="obttn"]')))
     element.click()
 
     element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'sso_username')))
