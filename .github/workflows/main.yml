@@ -32,11 +32,26 @@ jobs:
             ~/.vagrant.d/boxes/cdaf-VAGRANTSLASH-WindowsServerDC
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
-      - name: Windows Server DC
+      - name: Windows Server DC-Vagrant
         run: |
             vagrant plugin install vagrant-vbguest
             vagrant up dc
             vagrant powershell dc -c 'systeminfo'
+
+      - name: WebLogic-Download
+          env:
+            ORACLE_SSO_PASSWORD: ${{ secrets.ORACLE_SSO_PASSWORD}}
+            ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
+          run: |
+            cd ./puppet-weblogic/software
+            pip install selenium
+            python download.py
+
+      - name: WebLogic-Vagrant
+          run: |
+            cd ./puppet-weblogic
+            vagrant up client
+            vagrant halt
             
-      - name: Alfresco
+      - name: Alfresco-Vagrant
         run: vagrant up client
