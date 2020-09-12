@@ -18,6 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "admin" , primary: true do |admin|
 
     admin.vm.box = boxes['virtualbox']['box']
+    admin.vm.box_version = "0.0.1"
     #admin.vm.box_url = boxes['virtualbox']['box_url']
 
     admin.vm.provider :vmware_fusion do |v, override|
