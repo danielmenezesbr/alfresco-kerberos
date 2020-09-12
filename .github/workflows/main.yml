@@ -48,10 +48,10 @@ jobs:
           python download.py
 
       - name: WebLogic-Vagrant
-          run: |
-            cd ./puppet-weblogic
-            vagrant up client
-            vagrant halt
+        run: |
+          cd ./puppet-weblogic
+          vagrant up client
+          vagrant halt
             
       - name: Alfresco-Vagrant
         run: vagrant up client
