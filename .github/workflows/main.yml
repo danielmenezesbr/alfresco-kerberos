@@ -50,7 +50,7 @@ jobs:
       - name: WebLogic-Vagrant
         run: |
           cd ./puppet-weblogic
-          vagrant up client
+          vagrant up admin
           vagrant halt
             
       - name: Alfresco-Vagrant
