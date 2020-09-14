@@ -56,9 +56,11 @@ ${domain^^} = {
 EOF
 
 # add this computer to the ad.
-kinit --password-file=STDIN administrator <<'EOF'
-Password#
-EOF
+#kinit --password-file=STDIN administrator <<'EOF'
+#Password#
+#EOF
+echo 'Password#' | kinit administrator
+
 msktutil \
     --create \
     --keytab /etc/sssd/sssd.keytab \
