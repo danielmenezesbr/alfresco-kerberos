@@ -3,7 +3,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from retrying import retry
 import os
+import logging
+
+logger = logging.Logger('catch_all')
 
 print("Download Oracle")
 
@@ -31,43 +35,53 @@ options.add_experimental_option(
     }
 )
 
+@retry(stop_max_attempt_number=3)
 def download(url, css_link):
-    print("Start download process...")
-    driver = webdriver.Chrome(options=options)
-    driver.get(url)
-    print(driver.title)
+    driver = None
+    try:
+        print("Start download process...")
+        driver = webdriver.Chrome(options=options)
+        driver.get(url)
+        print(driver.title)
 
-    # logic
-    WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, css_link))).click()
+        # logic
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, css_link))).click()
 
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'a[class="download-file icn-download-locked"]')))
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'a[class="download-file icn-download-locked"]')))
 
-    element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name=licenseAccept]')))
-    elements = driver.find_elements_by_css_selector('input[name=licenseAccept]')
-    elements[1].click()
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name=licenseAccept]')))
+        elements = driver.find_elements_by_css_selector('input[name=licenseAccept]')
+        elements[1].click()
 
-    element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[class="obttn"]')))
-    element.click()
+        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[class="obttn"]')))
+        element.click()
 
-    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'sso_username')))
-    driver.execute_script("arguments[0].setAttribute('value', arguments[1])", element,
-                          os.environ['ORACLE_SSO_USERNAME'])
+        element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'sso_username')))
+        driver.execute_script("arguments[0].setAttribute('value', arguments[1])", element,
+                              os.environ['ORACLE_SSO_USERNAME'])
 
-    element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'ssopassword')))
-    driver.execute_script("arguments[0].setAttribute('value', arguments[1])", element,
-                          os.environ['ORACLE_SSO_PASSWORD'])
+        element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'ssopassword')))
+        driver.execute_script("arguments[0].setAttribute('value', arguments[1])", element,
+                              os.environ['ORACLE_SSO_PASSWORD'])
 
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'signin_button'))).click()
+        WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'signin_button'))).click()
 
-    driver.get('chrome://downloads/')
+        driver.get('chrome://downloads/')
 
-    WebDriverWait(driver, 60 * 60).until(lambda driver: download_progress(driver))
-    print("Download done")
-    driver.close()
-    driver.quit()
+        WebDriverWait(driver, 60 * 60).until(lambda driver: download_progress(driver))
+        print("Download done")
+        driver.close()
+        driver.quit()
+    except Exception as e:
+        print("Download failed")
+        raise Exception("Download failed.")
+    finally:
+        if driver != None:
+            driver.quit()
+
 
 download("https://www.oracle.com/java/technologies/javase-jce8-downloads.html", 'a[data-lbl="lightbox-open-jce_policy-8.zip"]')
 download("https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html", 'a[data-lbl="lightbox-open-jdk-8u151-linux-x64.tar.gz"]')
