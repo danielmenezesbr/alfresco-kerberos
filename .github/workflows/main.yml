@@ -57,3 +57,6 @@ jobs:
             
       - name: Alfresco-Vagrant
         run: vagrant up client
+        
+      - name: Alfresco-Test
+        run: vagrant provision dc --provision-with alfresco-test

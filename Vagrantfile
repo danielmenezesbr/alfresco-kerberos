@@ -36,6 +36,8 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", reboot: true
     config.vm.provision "shell", path: "provision/ad.ps1"
     config.vm.provision "ie", type: "shell", path: "provision/ie.ps1"
+	config.vm.provision "alfresco-test", type: "shell", path: "provision/clientlinux/provision/Alfresco-Test.ps1", run: "never"
+	
   
     config.vm.provider :virtualbox do |v, override|
       v.memory = 1024
