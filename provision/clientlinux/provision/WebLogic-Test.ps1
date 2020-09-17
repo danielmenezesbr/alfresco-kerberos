@@ -1,3 +1,38 @@
+function Retry-Command {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Position=0, Mandatory=$true)]
+        [scriptblock]$ScriptBlock,
+
+        [Parameter(Position=1, Mandatory=$false)]
+        [int]$Maximum = 5,
+
+        [Parameter(Position=2, Mandatory=$false)]
+        [int]$Delay = 100
+    )
+
+    Begin {
+        $cnt = 0
+    }
+
+    Process {
+        do {
+            $cnt++
+            try {
+                $ScriptBlock.Invoke()
+                return
+            } catch {
+                Write-Error $_.Exception.InnerException.Message -ErrorAction Continue
+                Start-Sleep -Milliseconds $Delay
+            }
+        } while ($cnt -lt $Maximum)
+
+        # Throw an error after $Maximum unsuccessful invocations. Doesn't need
+        # a condition, since the function returns upon successful invocation.
+        throw 'Execution failed.'
+    }
+}
+
 function test($label, $url, $match) {
     Write-Host $label
     $r = iwr $url -UseDefaultCredentials
@@ -8,7 +43,11 @@ function test($label, $url, $match) {
 }
 
 try {
-    test "Test debugKerberos..." http://clientlinux.mshome.net:8001/debugKerberos/secure/ "Remote user: vagrant"
+	Retry-Command -ScriptBlock {
+		test "Test debugKerberos - Home..." http://clientlinux.mshome.net:8001/debugKerberos/ "checkhostname.jsp"
+	} -Maximum 10 -Delay 60000
+	
+    test "Test debugKerberos - Secure..." http://clientlinux.mshome.net:8001/debugKerberos/secure/ "Remote user: vagrant"
 } catch {
     $r = $_.Exception
     Write-Host $r
