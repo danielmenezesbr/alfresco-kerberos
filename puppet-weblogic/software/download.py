@@ -14,9 +14,15 @@ logger = logging.Logger('catch_all')
 print("Download Oracle")
 
 def download_progress(driver):
-    print(str(driver.execute_script('''return document.querySelector("downloads-manager").shadowRoot.querySelectorAll("downloads-item")[0].shadowRoot.querySelector("#description").textContent''')).strip())
-    return driver.execute_script(
-        '''return document.querySelector("downloads-manager").shadowRoot.querySelectorAll("downloads-item")[0].shadowRoot.querySelector("#show").offsetParent !== null;''')
+    result = False
+    try:
+        print(str(driver.execute_script('''return document.querySelector("downloads-manager").shadowRoot.querySelectorAll("downloads-item")[0].shadowRoot.querySelector("#description").textContent''')).strip())
+        result = driver.execute_script(
+            '''return document.querySelector("downloads-manager").shadowRoot.querySelectorAll("downloads-item")[0].shadowRoot.querySelector("#show").offsetParent !== null;''')
+    except:
+        print(".")
+
+    return result
 
 
 if (os.environ['ORACLE_SSO_USERNAME'] == ""):
@@ -89,5 +95,5 @@ def download(url, css_link):
 
 
 download("https://www.oracle.com/java/technologies/javase-jce8-downloads.html", 'a[data-lbl="lightbox-open-jce_policy-8.zip"]')
-download("https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html", 'a[data-lbl="lightbox-open-jdk-8u151-linux-x64.tar.gz"]')
-download("https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html", 'a[data-file="//download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip"]')
+#download("https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html", 'a[data-lbl="lightbox-open-jdk-8u151-linux-x64.tar.gz"]')
+#download("https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html", 'a[data-file="//download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip"]')
