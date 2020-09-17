@@ -46,8 +46,11 @@ try {
 	Retry-Command -ScriptBlock {
 		test "Test debugKerberos - Home..." http://clientlinux.mshome.net:8001/debugKerberos/ "checkhostname.jsp"
 	} -Maximum 10 -Delay 60000
-	
-    test "Test debugKerberos - Secure..." http://clientlinux.mshome.net:8001/debugKerberos/secure/ "Remote user: vagrant"
+
+	Retry-Command -ScriptBlock {
+		test "Test debugKerberos - Secure..." http://clientlinux.mshome.net:8001/debugKerberos/secure/ "Remote user: vagrant"
+	} -Maximum 10 -Delay 60000
+
 } catch {
     $r = $_.Exception
     Write-Host $r
