@@ -11,6 +11,8 @@ jobs:
     runs-on: macos-10.15
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: WebLogic-Download
         env:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
@@ -44,8 +46,6 @@ jobs:
         run: | 
           VBoxManage --version
           vagrant up --version
-
-      - uses: actions/checkout@v2
 
       - name: Cache
         uses: actions/cache@v2
