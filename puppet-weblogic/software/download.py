@@ -4,8 +4,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from retrying import retry
+import traceback
 import os
 import logging
+import sys
 
 logger = logging.Logger('catch_all')
 
@@ -76,7 +78,10 @@ def download(url, css_link):
         driver.close()
         driver.quit()
     except Exception as e:
-        print("Download failed")
+        print("Download failed. Exception:")
+        print(traceback.format_exception(None,  # <- type(e) by docs, but ignored
+                                         e, e.__traceback__),
+              file=sys.stderr, flush=True)
         raise Exception("Download failed.")
     finally:
         if driver != None:
