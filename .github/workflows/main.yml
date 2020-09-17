@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: WebLogic-Download
         env:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
