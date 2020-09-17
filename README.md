@@ -1,6 +1,6 @@
-# alfresco-kerberos
+[![CI](https://github.com/danielmenezesbr/alfresco-kerberos/workflows/CI/badge.svg)](https://github.com/danielmenezesbr/alfresco-kerberos/actions)
 
-![CI](https://github.com/danielmenezesbr/alfresco-kerberos/workflows/CI/badge.svg)
+# alfresco-kerberos
 
 Alfresco with SPNEGO/Kerberos
 
