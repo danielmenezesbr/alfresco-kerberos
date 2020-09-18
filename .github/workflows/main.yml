@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-   job_1:
+  job_1:
     name: WebLogic-Download
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,6 @@ jobs:
             jdk-8u151-linux-x64.tar.gz
             fmw_12.2.1.2.0_wls.jar
             jce_policy-8.zip
-
 
   build:
     runs-on: macos-10.15
