@@ -16,7 +16,7 @@ jobs:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
           ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
         run: |
-          apt-get install bash -y
+          sudo apt-get install bash -y
           curl -s https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
           bash -s -- --cookie=accept-weblogicserver-server \
                   --username=$ORACLE_SSO_USERNAME \
