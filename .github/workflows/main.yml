@@ -18,7 +18,7 @@ jobs:
         run: | 
           curl -s https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
             sudo bash -s -- --cookie=accept-weblogicserver-server \
-                  --username=$ORACLE_SSO_USERNAME \
+                  --username=$ORACLE_SSO_USERNAME --password=$ORCL_PWD \
           http://download.oracle.com/otn/nt/middleware/12c/12212/fmw_12.2.1.2.0_wls_Disk1_1of1.zip
 
       - name: Upload math result for job 1
