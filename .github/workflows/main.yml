@@ -15,10 +15,9 @@ jobs:
         env:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
           ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
-        run: |
-          sudo apt-get install bash -y
+        run: | 
           curl -s https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
-          sudo bash -s -- --cookie=accept-weblogicserver-server \
+            sudo bash -s -- --cookie=accept-weblogicserver-server \
                   --username=$ORACLE_SSO_USERNAME \
           http://download.oracle.com/otn/nt/middleware/12c/12212/fmw_12.2.1.2.0_wls_Disk1_1of1.zip
 
