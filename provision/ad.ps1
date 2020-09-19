@@ -1,5 +1,4 @@
 Import-Module ServerManager
-Add-WindowsFeature RSAT-AD-PowerShell
 import-module activedirectory
 New-ADuser -Name "kertest" -SamAccountName kertest -Enabled $true -AccountPassword (ConvertTo-SecureString -AsPlainText "SuperSecure@123!!!" -Force)
 New-ADuser -Name "svctest" -SamAccountName svctest -Enabled $true -AccountPassword (ConvertTo-SecureString -AsPlainText "Monkey.123" -Force)
