@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+ls -la /weblogicfiles
 sudo cp -a /weblogicfiles/httpclientlinux.keytab /opt/oracle/wlsdomains/domains/Wls1221/
 sudo chown oracle:dba /opt/oracle/wlsdomains/domains/Wls1221/httpclientlinux.keytab
 
