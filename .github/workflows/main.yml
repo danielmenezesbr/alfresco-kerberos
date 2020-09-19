@@ -11,6 +11,12 @@ jobs:
     name: WebLogic-Download
     runs-on: ubuntu-latest
     steps:
+      - name: Setup tmate session
+        env:
+          ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
+          ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
+        uses: mxschmitt/action-tmate@v3
+
       - shell: bash
         env:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
