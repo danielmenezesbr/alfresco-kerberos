@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  job_1:
+  download:
     name: WebLogic-Download
     runs-on: ubuntu-latest
     steps:
@@ -23,10 +23,22 @@ jobs:
           ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
         run: | 
           sudo apt-get install libxml2-utils
-          curl -s https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
-            bash -s -- --cookie=accept-weblogicserver-server \
-                  --username=$ORACLE_SSO_USERNAME --password=$ORCL_PWD \
+          wget -O - -q https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
+          bash -s -- --cookie=accept-weblogicserver-server \
+                  --username=$ORACLE_SSO_USERNAME \
           http://download.oracle.com/otn/nt/middleware/12c/12212/fmw_12.2.1.2.0_wls_Disk1_1of1.zip
+          wget -O - -q https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
+          bash -s -- --cookie=accept-weblogicserver-server \
+                  --username=$ORACLE_SSO_USERNAME \
+          https://download.oracle.com/otn/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
+          wget \
+                        --no-cookies \
+                        --no-check-certificate \
+                        --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
+                        -O jce_policy-8.zip \
+                        http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
+          unzip fmw_12.2.1.3.0_wls_Disk1_1of1.zip
+          ls -la
 
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v2
@@ -38,6 +50,7 @@ jobs:
             jce_policy-8.zip
 
   build:
+    needs: download
     runs-on: macos-10.15
 
     steps:
