@@ -15,23 +15,10 @@ jobs:
         env:
           ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
           ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
-        run: |
-          wget \
-              --no-cookies \
-              --no-check-certificate \
-              --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
-              -O jce_policy-8.zip \
-              http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
-          wget -O - -q https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
+        run: wget -O - -q https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
           bash -s -- --cookie=accept-weblogicserver-server \
                   --username=$ORACLE_SSO_USERNAME \
           http://download.oracle.com/otn/nt/middleware/12c/12212/fmw_12.2.1.2.0_wls_Disk1_1of1.zip
-          wget -O - -q https://raw.githubusercontent.com/typekpb/oradown/master/oradown.sh  | \
-          bash -s -- --cookie=accept-weblogicserver-server \
-                  --username=$ORACLE_SSO_USERNAME \
-          https://download.oracle.com/otn/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.tar.gz
-          ls -la
-          unzip fmw_12.2.1.3.0_wls_Disk1_1of1.zip
 
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v2
