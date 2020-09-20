@@ -33,16 +33,17 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "winserver"
     config.vm.network "private_network", ip: "192.168.56.2"
     config.vm.provision "shell", path: "provision/uninstall-windefeder.ps1"
-    config.vm.provision "shell", reboot: true
+	config.vm.provision "shell", path: "provision/add-RSAT-AD.ps1"
     config.vm.provision "shell", path: "provision/ad.ps1"
+    #config.vm.provision "shell", reboot: true
     config.vm.provision "ie", type: "shell", path: "provision/ie.ps1"
 	config.vm.provision "alfresco-test", type: "shell", path: "provision/clientlinux/provision/Alfresco-Test.ps1", run: "never"
 	config.vm.provision "weblogic-test", type: "shell", path: "provision/clientlinux/provision/WebLogic-Test.ps1", run: "never"
 	
   
     config.vm.provider :virtualbox do |v, override|
-      v.memory = 1024
-	  v.cpus = 1
+      v.memory = 2048
+	  v.cpus = 2
 	  v.gui = true
 	  v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end

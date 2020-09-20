@@ -1,5 +1,5 @@
 Import-Module ServerManager
-import-module activedirectory
+Import-Module ActiveDirectory
 New-ADuser -Name "kertest" -SamAccountName kertest -Enabled $true -AccountPassword (ConvertTo-SecureString -AsPlainText "SuperSecure@123!!!" -Force)
 New-ADuser -Name "svctest" -SamAccountName svctest -Enabled $true -AccountPassword (ConvertTo-SecureString -AsPlainText "Monkey.123" -Force)
 setspn -A sky.net/kertest kertest
