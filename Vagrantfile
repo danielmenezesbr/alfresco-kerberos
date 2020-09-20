@@ -42,8 +42,8 @@ Vagrant.configure("2") do |config|
 	
   
     config.vm.provider :virtualbox do |v, override|
-      v.memory = 2048
-	  v.cpus = 2
+      v.memory = 1024
+	  v.cpus = 1
 	  v.gui = true
 	  v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
