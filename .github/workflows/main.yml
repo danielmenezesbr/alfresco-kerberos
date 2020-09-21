@@ -37,6 +37,9 @@ jobs:
             vagrant powershell dc -c 'systeminfo'
 
       - name: WebLogic-Vagrant
+        env:
+          ORACLE_SSO_USERNAME: ${{ secrets.ORACLE_SSO_USERNAME}}
+          ORCL_PWD: ${{ secrets.ORACLE_SSO_PASSWORD}}
         run: |
           cd ./puppet-weblogic
           vagrant up admin
