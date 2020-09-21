@@ -95,5 +95,5 @@ def download(url, css_link):
 
 
 download("https://www.oracle.com/java/technologies/javase-jce8-downloads.html", 'a[data-lbl="lightbox-open-jce_policy-8.zip"]')
-#download("https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html", 'a[data-lbl="lightbox-open-jdk-8u151-linux-x64.tar.gz"]')
-#download("https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html", 'a[data-file="//download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip"]')
+download("https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html", 'a[data-lbl="lightbox-open-jdk-8u151-linux-x64.tar.gz"]')
+download("https://www.oracle.com/middleware/technologies/weblogic-server-installers-downloads.html", 'a[data-file="//download.oracle.com/otn/nt/middleware/12c/12213/fmw_12.2.1.3.0_wls_Disk1_1of1.zip"]')

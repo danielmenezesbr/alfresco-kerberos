@@ -52,6 +52,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.vmx["memsize"] = "3072"
     end	
 
+    admin.vm.provision :shell, path: "./software/download.sh", env: {ORACLE_SSO_USERNAME:ENV['ORACLE_SSO_USERNAME'], ORCL_PWD:ENV['ORCL_PWD']}
+
     admin.vm.provision :shell, path: "./puppet_config.sh"
 
     # in order to enable this shared folder, execute first the following in the host machine: mkdir log_puppet_weblogic && chmod a+rwx log_puppet_weblogic
