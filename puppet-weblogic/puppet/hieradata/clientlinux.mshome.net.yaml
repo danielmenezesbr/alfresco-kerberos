@@ -469,7 +469,7 @@ server_instances:
            - '-Dweblogic.Stderr=/var/log/weblogic/wlsServer1_err.out'
            - '-Dweblogic.management.allowClearTextPasswords=true'
            - '-Djava.security.krb5.realm=MSHOME.NET'
-           - '-Djava.security.krb5.kdc=winserver.mshome.net'
+           - '-Djava.security.krb5.kdc=dc.mshome.net'
            - '-Djava.security.auth.login.config=krb5Login.conf'
            - '-Dcom.ibm.security.jgss.debug=all'
            - '-Djavax.security.auth.useSubjectCredsOnly=false'
