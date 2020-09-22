@@ -8,12 +8,12 @@ dns_lookup_realm = true
 
 [realms]
 MSHOME.NET = {
-    kdc = dc.mshome.net
-    admin_server = dc.mshome.net
+    kdc = winserver.mshome.net
+    admin_server = winserver.mshome.net
 }
 EOF
 sudo yum -y install krb5-workstation;
-sudo echo "192.168.56.2 dc.mshome.net" >>/etc/hosts
+sudo echo "192.168.56.2 winserver.mshome.net" >>/etc/hosts
 ln -sf /vagrant/puppet/hiera.yaml /etc/puppetlabs/code/hiera.yaml;
 rm -rf /etc/puppetlabs/code/modules;
 ln -sf /vagrant/puppet/environments/development/modules /etc/puppetlabs/code/modules;

@@ -15,7 +15,7 @@ domain_dn="DC=$(echo $domain | sed -E 's/\./,DC=/g')"
 export DEBIAN_FRONTEND=noninteractive
 
 # make sure we can can resolve the dc dns domain name.
-echo "$domain_ip dc.$domain" >>/etc/hosts
+echo "$domain_ip winserver.$domain" >>/etc/hosts
 
 # trust the ad ca.
 #openssl x509 \
@@ -35,8 +35,8 @@ echo "$domain_ip dc.$domain" >>/etc/hosts
 # NB these are not really used as we create the entire krb5.conf bellow.
 debconf-set-selections<<EOF
 krb5-config krb5-config/default_realm string ${domain^^}
-krb5-config krb5-config/kerberos_servers string dc.$domain
-krb5-config krb5-config/admin_server string dc.$domain
+krb5-config krb5-config/kerberos_servers string winserver.$domain
+krb5-config krb5-config/admin_server string winserver.$domain
 EOF
 apt-get install -y sssd heimdal-clients msktutil
 
@@ -50,8 +50,8 @@ dns_lookup_realm = true
 
 [realms]
 ${domain^^} = {
-    kdc = dc.$domain
-    admin_server = dc.$domain
+    kdc = winserver.$domain
+    admin_server = winserver.$domain
 }
 EOF
 
@@ -65,10 +65,10 @@ msktutil \
     --create \
     --keytab /etc/sssd/sssd.keytab \
     --no-reverse-lookups \
-    --server dc.$domain \
+    --server winserver.$domain \
     --user-creds-only
 ldapmodify \
-    -h dc.$domain \
+    -h winserver.$domain \
     <<EOF
 dn: CN=$(hostname),CN=Computers,$domain_dn
 changeType: modify
@@ -80,7 +80,7 @@ operatingSystemVersion: $(bash -c 'source /etc/os-release && echo $VERSION')
 -
 EOF
 ldapsearch \
-  -h dc.$domain \
+  -h winserver.$domain \
   -b CN=Computers,$domain_dn \
   '(objectClass=computer)'
 ktutil --keytab=/etc/sssd/sssd.keytab list
@@ -114,7 +114,7 @@ access_provider = ad
 dyndns_update = false
 fallback_homedir = /home/%d/%u
 default_shell = /bin/bash
-ad_server = dc.$domain
+ad_server = winserver.$domain
 ad_domain = $domain
 ldap_schema = ad
 ldap_id_mapping = true

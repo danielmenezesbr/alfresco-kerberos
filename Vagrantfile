@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
     config.winrm.retry_delay = 10
     config.vm.graceful_halt_timeout = 600
     
-    #config.vm.hostname = "winserver"
+    config.vm.hostname = "winserver"
     config.vm.network "private_network", ip: "192.168.56.2"
     config.vm.provision "shell", path: "provision/uninstall-windefeder.ps1"
 	config.vm.provision "shell", path: "provision/add-RSAT-AD.ps1"
