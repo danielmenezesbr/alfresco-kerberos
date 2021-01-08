@@ -2,5 +2,5 @@
 
 # alfresco-kerberos
 
-Alfresco with SPNEGO/Kerberos
+Alfresco with SPNEGO/Kerberos.
 
