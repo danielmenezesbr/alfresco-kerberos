@@ -15,7 +15,7 @@ jobs:
         run: |
           set -exuo pipefail
           #curl -L https://raw.githubusercontent.com/Homebrew/homebrew-cask/b6ac3795c1df9f97242481c0817b1165e3e6306a/Casks/react-native-debugger.rb > react-native-debugger.rb && brew install react-native-debugger.rb
-          brew install https://raw.githubusercontent.com/Homebrew/homebrew-cask/7f340b97d60907da225e9f5c10e81f9285ef2edb/Casks/vagrant.rb --cask
+          export CODE_SIGNING_REQUIRED=NO && brew install https://raw.githubusercontent.com/Homebrew/homebrew-cask/7f340b97d60907da225e9f5c10e81f9285ef2edb/Casks/vagrant.rb --cask
           brew install https://raw.githubusercontent.com/danielmenezesbr/homebrew-cask/virtualbox-6024/Casks/virtualbox.rb --cask
           
       - name: Show packages version
