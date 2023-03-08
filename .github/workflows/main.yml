@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Debugging with ssh
+        uses: lhotari/action-upterm@v1
+
       - name: always-upload-cache
         uses: pat-s/always-upload-cache@v3.0.11
         with:
