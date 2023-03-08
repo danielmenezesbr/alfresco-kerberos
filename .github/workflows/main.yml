@@ -30,11 +30,13 @@ jobs:
         with:
           path: |
             ~/.vagrant.d/boxes/cdaf-VAGRANTSLASH-WindowsServerDC
+            /Library/Caches/Homebrew
+            ~/Library/Caches/Homebrew
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Windows Server DC-Vagrant
         run: |
-            sudo "/Library/Application Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh" restart
+            /Library/Application Support/VirtualBox/LaunchDaemons/VirtualBoxStartup.sh restart
             vagrant plugin install vagrant-vbguest
             vagrant up dc --provider=virtualbox
             vagrant powershell dc -c 'systeminfo'
