@@ -14,8 +14,8 @@ jobs:
       - name: Update packages
         run: |
           set -exuo pipefail
-          brew install virtualbox
-          #brew install https://raw.githubusercontent.com/Homebrew/homebrew-cask/7e703e0466a463fe26ab4e253e28baa9c20d5f36/Casks/virtualbox.rb --cask
+          #brew install virtualbox
+          brew install https://raw.githubusercontent.com/Homebrew/homebrew-cask/aa3c55951fc9d687acce43e5c0338f42c1ddff7b/Casks/virtualbox.rb --cask
           brew install https://raw.githubusercontent.com/danielmenezesbr/alfresco-kerberos/master/.github/workflows/vagrant.rb --cask
           curl -L https://raw.githubusercontent.com/Homebrew/homebrew-cask/b6ac3795c1df9f97242481c0817b1165e3e6306a/Casks/react-native-debugger.rb > react-native-debugger.rb && brew install react-native-debugger.rb
           #brew install https://raw.githubusercontent.com/danielmenezesbr/homebrew-cask/virtualbox-6024/Casks/virtualbox.rb --cask
