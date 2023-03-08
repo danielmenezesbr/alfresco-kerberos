@@ -35,7 +35,7 @@ jobs:
       - name: Windows Server DC-Vagrant
         run: |
             vagrant plugin install vagrant-vbguest
-            vagrant up dc
+            vagrant up dc --provider=virtualbox
             vagrant powershell dc -c 'systeminfo'
 
       - name: WebLogic-Vagrant
