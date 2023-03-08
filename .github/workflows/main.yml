@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-10.15
+    runs-on: macos-11
 
     steps:
       - uses: actions/checkout@v2
@@ -14,8 +14,8 @@ jobs:
       - name: Update packages
         run: |
           set -exuo pipefail
-          #curl -L https://raw.githubusercontent.com/Homebrew/homebrew-cask/b6ac3795c1df9f97242481c0817b1165e3e6306a/Casks/react-native-debugger.rb > react-native-debugger.rb && brew install react-native-debugger.rb
           brew install https://raw.githubusercontent.com/danielmenezesbr/alfresco-kerberos/master/.github/workflows/vagrant.rb --cask
+          curl -L https://raw.githubusercontent.com/Homebrew/homebrew-cask/b6ac3795c1df9f97242481c0817b1165e3e6306a/Casks/react-native-debugger.rb > react-native-debugger.rb && brew install react-native-debugger.rb
           brew install https://raw.githubusercontent.com/danielmenezesbr/homebrew-cask/virtualbox-6024/Casks/virtualbox.rb --cask
           
       - name: Show packages version
