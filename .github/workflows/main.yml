@@ -11,6 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Shutdown
+        run: |
+          sudo shutdown -r now
+
+      - name: teste
+        run: |
+          echo "test"
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
